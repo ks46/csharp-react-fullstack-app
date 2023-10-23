@@ -5,6 +5,6 @@ namespace courses.wwwapi.Repository
 {
     public interface IRepository
     {
-        IEnumerable<Student> GetStudent(int id);
+        IEnumerable<Student> GetStudent(int studentId);
     }
 }

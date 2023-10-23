@@ -1,9 +1,13 @@
-﻿namespace courses.wwwapi.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace courses.wwwapi.Models
 {
     public class CoursesSpecializations
     {
-        public int specializationId;
-        public string category;
-        public int courseId;
+        [ForeignKey("Course")]
+        public int courseId { get; set; }
+
+        public int specializationId { get; set; }
+        public string category { get; set; }
     }
 }

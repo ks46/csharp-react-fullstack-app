@@ -21,6 +21,7 @@ namespace courses.wwwapi.EndPoints
         /// Status 404 - Student with such studentId does not exist
         /// </returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         private static async Task<IResult> GetStudent(int studentId, IRepository service)
         {
             throw new NotImplementedException();

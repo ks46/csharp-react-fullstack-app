@@ -4,7 +4,7 @@ namespace courses.wwwapi.Repository
 {
     public class Repository : IRepository
     {
-        public IEnumerable<Student> GetStudent(int id)
+        public IEnumerable<Student> GetStudent(int studentId)
         {
             throw new NotImplementedException();
         }
