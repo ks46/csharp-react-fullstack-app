@@ -4,6 +4,8 @@ namespace courses.wwwapi.Models
 {
     public class CoursesDeclarations
     {
+        public int id { get; set; }
+
         [ForeignKey("Course")]
         public int courseId { get; set; }
 

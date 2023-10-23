@@ -21,6 +21,7 @@ namespace courses.wwwapi.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Declaration> Declarations { get; set; }
-
+        public DbSet<CoursesDeclarations> CoursesDeclarations { get; set; }
+        public DbSet<CoursesSpecializations> CoursesSpecializations { get; set; }
     }
 }
