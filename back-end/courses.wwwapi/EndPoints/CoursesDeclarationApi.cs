@@ -1,4 +1,5 @@
-﻿using courses.wwwapi.Repository;
+﻿using courses.wwwapi.Models;
+using courses.wwwapi.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace courses.wwwapi.EndPoints
@@ -8,6 +9,7 @@ namespace courses.wwwapi.EndPoints
         public static void ConfigureCoursesDeclarationApi(this WebApplication app)
         {
             app.MapGet("/students/{studentId}", GetStudent);
+            app.MapGet("/students/{studentId}/courses", GetCourses);
             app.MapPost("/students/{studentId}/declarations", PostDeclaration);
             app.MapGet("/students/{studentId}/declarations/{declarationId}", GetDeclaration);
         }
@@ -25,6 +27,34 @@ namespace courses.wwwapi.EndPoints
         private static async Task<IResult> GetStudent(int studentId, IRepository service)
         {
             throw new NotImplementedException();
+        }
+
+
+        /// <summary>
+        /// Get all courses for student with such studentId
+        /// </summary>
+        /// <returns>
+        /// Status 200 - List of Course objects
+        /// Status 404 - Student with such studentId does not exist
+        /// </returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        private static async Task<IResult> GetCourses(int studentId, IRepository service)
+        {
+            try
+            {
+                return await Task.Run(() =>
+                {
+                    IEnumerable<Course> courses = service.GetCourses(studentId);
+                    if (courses == null)
+                        return Results.NotFound();
+                    return Results.Ok(courses);
+                });
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem(ex.Message);
+            }
         }
 
 
