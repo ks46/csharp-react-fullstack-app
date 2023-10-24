@@ -32,4 +32,6 @@ app.MapControllers();
 
 app.ConfigureCoursesDeclarationApi();
 
+app.SeedCoursesDeclarationApi();
+
 app.Run();
