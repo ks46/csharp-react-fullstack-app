@@ -101,6 +101,75 @@ namespace courses.wwwapi.Data
             new Course() { id = 94, name = "Wireless Links", ects = 6, description = "Elective Specialization courses", semester = 8, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow }
         };
 
+        private static List<CoursesSpecializations> _specializations = new List<CoursesSpecializations>()
+        {
+            new CoursesSpecializations() { courseId = 8, specializationId = 6, category = "B" },
+            new CoursesSpecializations() { courseId = 22, specializationId = 2, category = "B" },
+            new CoursesSpecializations() { courseId = 22, specializationId = 3, category = "B" },
+            new CoursesSpecializations() { courseId = 23, specializationId = 5, category = "Y" },
+            new CoursesSpecializations() { courseId = 25, specializationId = 3, category = "B" },
+            new CoursesSpecializations() { courseId = 25, specializationId = 4, category = "Y" },
+            new CoursesSpecializations() { courseId = 26, specializationId = 1, category = "B" },
+            new CoursesSpecializations() { courseId = 26, specializationId = 6, category = "B" },
+            new CoursesSpecializations() { courseId = 27, specializationId = 6, category = "Y" },
+            new CoursesSpecializations() { courseId = 28, specializationId = 2, category = "Y" },
+            new CoursesSpecializations() { courseId = 28, specializationId = 3, category = "Y" },
+            new CoursesSpecializations() { courseId = 29, specializationId = 1, category = "Y" },
+            new CoursesSpecializations() { courseId = 31, specializationId = 3, category = "B" },
+            new CoursesSpecializations() { courseId = 31, specializationId = 4, category = "B" },
+            new CoursesSpecializations() { courseId = 32, specializationId = 1, category = "B" },
+            new CoursesSpecializations() { courseId = 32, specializationId = 2, category = "B" },
+            new CoursesSpecializations() { courseId = 33, specializationId = 5, category = "B" },
+            new CoursesSpecializations() { courseId = 34, specializationId = 5, category = "B" },
+            new CoursesSpecializations() { courseId = 35, specializationId = 3, category = "B" },
+            new CoursesSpecializations() { courseId = 36, specializationId = 3, category = "Y" },
+            new CoursesSpecializations() { courseId = 36, specializationId = 4, category = "B" },
+            new CoursesSpecializations() { courseId = 37, specializationId = 2, category = "B" },
+            new CoursesSpecializations() { courseId = 38, specializationId = 4, category = "Y" },
+            new CoursesSpecializations() { courseId = 39, specializationId = 4, category = "B" },
+            new CoursesSpecializations() { courseId = 41, specializationId = 3, category = "B" },
+            new CoursesSpecializations() { courseId = 41, specializationId = 5, category = "B" },
+            new CoursesSpecializations() { courseId = 42, specializationId = 2, category = "B" },
+            new CoursesSpecializations() { courseId = 43, specializationId = 1, category = "Y" },
+            new CoursesSpecializations() { courseId = 44, specializationId = 5, category = "Y" },
+            new CoursesSpecializations() { courseId = 45, specializationId = 2, category = "B" },
+            new CoursesSpecializations() { courseId = 45, specializationId = 6, category = "B" },
+            new CoursesSpecializations() { courseId = 46, specializationId = 1, category = "B" },
+            new CoursesSpecializations() { courseId = 47, specializationId = 5, category = "B" },
+            new CoursesSpecializations() { courseId = 47, specializationId = 6, category = "B" },
+            new CoursesSpecializations() { courseId = 49, specializationId = 2, category = "Y" },
+            new CoursesSpecializations() { courseId = 50, specializationId = 4, category = "B" },
+            new CoursesSpecializations() { courseId = 50, specializationId = 5, category = "B" },
+            new CoursesSpecializations() { courseId = 52, specializationId = 1, category = "B" },
+            new CoursesSpecializations() { courseId = 53, specializationId = 1, category = "B" },
+            new CoursesSpecializations() { courseId = 53, specializationId = 2, category = "B" },
+            new CoursesSpecializations() { courseId = 53, specializationId = 6, category = "B" },
+            new CoursesSpecializations() { courseId = 54, specializationId = 2, category = "B" },
+            new CoursesSpecializations() { courseId = 54, specializationId = 3, category = "B" },
+            new CoursesSpecializations() { courseId = 55, specializationId = 1, category = "B" },
+            new CoursesSpecializations() { courseId = 58, specializationId = 5, category = "B" },
+            new CoursesSpecializations() { courseId = 59, specializationId = 2, category = "B" },
+            new CoursesSpecializations() { courseId = 59, specializationId = 3, category = "B" },
+            new CoursesSpecializations() { courseId = 62, specializationId = 5, category = "B" },
+            new CoursesSpecializations() { courseId = 64, specializationId = 4, category = "B" },
+            new CoursesSpecializations() { courseId = 64, specializationId = 5, category = "B" },
+            new CoursesSpecializations() { courseId = 65, specializationId = 4, category = "B" },
+            new CoursesSpecializations() { courseId = 65, specializationId = 6, category = "B" },
+            new CoursesSpecializations() { courseId = 66, specializationId = 1, category = "B" },
+            new CoursesSpecializations() { courseId = 66, specializationId = 2, category = "B" },
+            new CoursesSpecializations() { courseId = 71, specializationId = 1, category = "B" },
+            new CoursesSpecializations() { courseId = 73, specializationId = 3, category = "B" },
+            new CoursesSpecializations() { courseId = 74, specializationId = 1, category = "B" },
+            new CoursesSpecializations() { courseId = 75, specializationId = 4, category = "B" },
+            new CoursesSpecializations() { courseId = 77, specializationId = 1, category = "B" },
+            new CoursesSpecializations() { courseId = 86, specializationId = 1, category = "B" },
+            new CoursesSpecializations() { courseId = 86, specializationId = 2, category = "B" },
+            new CoursesSpecializations() { courseId = 88, specializationId = 3, category = "B" },
+            new CoursesSpecializations() { courseId = 92, specializationId = 6, category = "B" },
+            new CoursesSpecializations() { courseId = 93, specializationId = 5, category = "B" },
+            new CoursesSpecializations() { courseId = 93, specializationId = 6, category = "B" }
+        };
+
         public static void SeedCoursesDeclarationApi(this WebApplication app)
         {
             using (var db = new DataContext())
@@ -111,7 +180,7 @@ namespace courses.wwwapi.Data
                     DateTime dt = DateTime.UtcNow;
                     db.Students.Add(new Student()
                     {
-                        id = ,
+                        id = 1,
                         firstName = "Konstantina",
                         lastName = "Stafyla",
                         code = "1115201700000",
@@ -129,13 +198,16 @@ namespace courses.wwwapi.Data
                 // initialise Courses table with course contents
                 if (!db.Courses.Any())
                 {
-                    // initialise Courses table with course contents
                     db.Courses.AddRange(_courses);
                     db.SaveChanges();
-                    // TODO: initialise CoursesSpecializations table with course contents
                 }
 
-
+                // initialise CoursesSpecializations table with course contents
+                if (!db.CoursesSpecializations.Any())
+                {
+                    db.CoursesSpecializations.AddRange(_specializations);
+                    db.SaveChanges();
+                }
             }
 
         }
