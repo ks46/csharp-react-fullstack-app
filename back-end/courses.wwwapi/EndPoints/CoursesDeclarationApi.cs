@@ -26,7 +26,20 @@ namespace courses.wwwapi.EndPoints
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         private static async Task<IResult> GetStudent(int studentId, IRepository service)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await Task.Run(() =>
+                {
+                    Student? student = service.GetStudent(studentId);
+                    if (student == null)
+                        return Results.NotFound();
+                    return Results.Ok(student);
+                });
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem(ex.Message);
+            }
         }
 
 

@@ -5,11 +5,15 @@ namespace courses.wwwapi.Repository
 {
     public class Repository : IRepository
     {
-        Student IRepository.GetStudent(int studentId)
+        public Student? GetStudent(int studentId)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext())
+            {
+                return db.Students.SingleOrDefault(s => s.id == studentId);
+            }
+            return null;
         }
-
+        
         public IEnumerable<Course> GetCourses(int studentId)
         {
             using (var db = new DataContext())
