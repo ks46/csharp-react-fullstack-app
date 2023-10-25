@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header.js';
 import LeftMenu from './components/LeftMenu';
-import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import DataContext from './DataContext';
 import ViewPostPage from './pages/ViewPostPage';
+import CoursesDeclarationForm from './pages/CoursesDeclarationForm';
 
 function App() {
   const [user, setUser] = useState(null)
@@ -43,7 +43,7 @@ function App() {
         <LeftMenu />
 
         <Routes>
-          <Route path='/' element={<Dashboard />} />
+          <Route path='/' element={<CoursesDeclarationForm />} />
           <Route path='/profile/' element={<Profile />} />
           <Route path='/profile/:id' element={<Profile />} />
           <Route path='/posts/:id' element={<ViewPostPage />} />
