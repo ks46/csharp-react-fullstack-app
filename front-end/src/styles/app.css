@@ -1,0 +1,26 @@
+.app {
+  height: 100vh;
+
+  display: grid;
+  grid-template:
+    'header header' 80px
+    'left-menu main' 1fr / 135px 1fr;
+}
+
+.app > .header {
+  grid-area: header;
+  padding: 15px 50px;
+  background-color: #000046;
+  color: #F0F5FA;
+  display: grid;
+  grid-template-columns: 11fr auto;
+}
+
+.app > .header > img {
+  width: 350px;
+}
+
+.app > .main {
+  grid-area: main;
+  margin: 20px;
+}
