@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom"
 
-export default function UserBanner({ name, id }) {
-  if (!name)
-    name = 'TODO: get name'
-  const initials = name[0] + name[name.indexOf(' ') + 1]
+export default function UserBanner({ name, firstName, lastName, id }) {
+  // TODO: get rid of name property
+  const initials = name ? name[0] + name[name.indexOf(' ') + 1]
+                : firstName[0] + lastName[0]
   
   return (
-    <Link to={`/profile/${id}`}>
+    // TODO: use appropriate links below
+    <Link to={`/profile/${id}`}> 
       <span className='user-banner'>{initials}</span>
     </Link>
   )
