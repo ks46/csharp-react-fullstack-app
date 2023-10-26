@@ -26,7 +26,10 @@ export default function CoursesDeclarationForm() {
       <h1 className='title'>Courses Declaration Form</h1>
       <div className='cd-form'>
         <ChooseSemester semesterNo={semesterTab} setSemesterTab={setSemesterTab} />
-        <CoursesList courses={filteredCourses} />
+        {
+          filteredCourses &&
+          <CoursesList courses={filteredCourses} />
+        }
       </div>
     </main>
   )
