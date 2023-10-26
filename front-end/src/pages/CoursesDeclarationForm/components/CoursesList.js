@@ -1,9 +1,13 @@
-function Course({ course }) {
+function Course({ course, isChecked, updateSelectedCourses }) {
   // TODO: display specializations for each course
   return (
     <tr>
       <td className='checkbox-table-col'>
-        <input type='checkbox'/>
+        <input
+          type='checkbox'
+          checked={isChecked}
+          onChange={() => updateSelectedCourses(course.id)}
+        />
       </td>
       <td className='course-table-col'>{course.name}</td>
       <td className='ects-table-col'>{course.ects}</td>
@@ -18,7 +22,8 @@ function Course({ course }) {
   );
 }
 
-export default function CoursesList({ courses }) {
+export default function CoursesList({ courses, selectedCourses, updateSelectedCourses }) {
+  
   return (
     <div className='courses-list'>
       <table>
@@ -38,7 +43,9 @@ export default function CoursesList({ courses }) {
         </thead>
         <tbody>
           {
-            courses.map(c => <Course course={c} key={c.id} />)
+            courses.map(c => <Course course={c} isChecked={selectedCourses.includes(c.id)}
+            updateSelectedCourses={updateSelectedCourses}
+              key={c.id} />)
           }
         </tbody>
       </table>

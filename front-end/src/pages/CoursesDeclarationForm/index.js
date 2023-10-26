@@ -4,9 +4,21 @@ import CoursesList from "./components/CoursesList";
 import '../../styles/cd_form.css'
 
 export default function CoursesDeclarationForm() {
-  const [formData, setFormData] = useState([])
+  const [selectedCourses, setSelectedCourses] = useState([1,46])
   const [courses, setCourses] = useState([])
   const [semesterTab, setSemesterTab] = useState(1)
+
+  const updateSelectedCourses = (courseId) => {
+    const index = selectedCourses.indexOf(courseId)
+    if (index === -1) {
+      // insert this courseId to selectedCourses
+      setSelectedCourses([courseId, ...selectedCourses])
+    } else {
+      const newSelectedCourses = [...selectedCourses]
+      newSelectedCourses.splice(index, 1)
+      setSelectedCourses(newSelectedCourses)
+    }
+  }
 
   async function getCourses() {
     // TODO: insert studentId parameter into the url to fetch data
@@ -28,7 +40,11 @@ export default function CoursesDeclarationForm() {
         <ChooseSemester semesterNo={semesterTab} setSemesterTab={setSemesterTab} />
         {
           filteredCourses &&
-          <CoursesList courses={filteredCourses} />
+          <CoursesList
+            courses={filteredCourses}
+            selectedCourses={selectedCourses}
+            updateSelectedCourses={updateSelectedCourses}
+          />
         }
       </div>
     </main>

@@ -7,7 +7,8 @@ function SemesterItem({ semesterNo, isActive, setSemesterTab }) {
       onClick={() => setSemesterTab(semesterNo)}
     >
       <p className={activeClass}>
-        {`Semester ${semesterNo}`}</p>
+        {`Semester ${semesterNo}`}
+      </p>
     </li>
   )
 }
