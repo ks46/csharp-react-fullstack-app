@@ -7,7 +7,7 @@ function ProfileHeader({ user }) {
   return (
     <div className='profile-header'>
       <UserBanner firstName={user.firstName} lastName={user.lastName} id={user.id} />
-      <h2 className='name'>{user.name}</h2>
+      <h2 className='name'>{user.firstName} {user.lastName}</h2>
     </div>
   )
 }
