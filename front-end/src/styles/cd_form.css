@@ -1,0 +1,50 @@
+/* NOTE: styles for courses declaration form page */
+.app > .cd-page > .title {
+  margin: 20px;
+}
+
+.app > .cd-page > .cd-form {
+  display: grid;
+  grid-template:
+    'choose-semester courses-list' 1fr /
+    130px 1fr;
+}
+
+.app > .cd-page > .cd-form > .choose-semester {
+  grid-area: choose-semester;
+  padding: 10px;
+  /* background-color: blueviolet; */
+}
+
+.app > .cd-page > .cd-form > .choose-semester > .semester-list {
+  display: grid;
+  grid-gap: 10px;
+}
+
+.app > .cd-page > .cd-form > .choose-semester > .semester-list > .semester-item {
+  padding: 5px 10px;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #000046;
+  border-radius: 5px;
+}
+
+.app > .cd-page > .cd-form > .choose-semester > .semester-list > .semester-item .active {
+  color: #000046;
+}
+
+.app > .cd-page > .cd-form > .choose-semester > .semester-list > .semester-item .active-bg {
+  background-color: #E6EBF5;
+}
+
+.app > .cd-page > .cd-form > .choose-semester > .semester-list > .semester-item .inactive {
+  color: #64648C;
+  border-color: #64648C;
+}
+
+.app > .cd-page > .cd-form > .courses-list {
+  grid-area: courses-list;
+  background-color: cadetblue;
+}

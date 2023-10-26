@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ChooseSemester from "./components/ChooseSemester";
 import CoursesList from "./components/CoursesList";
+import '../../styles/cd_form.css'
 
 export default function CoursesDeclarationForm() {
   const [formData, setFormData] = useState([])
@@ -21,9 +22,12 @@ export default function CoursesDeclarationForm() {
   let filteredCourses = courses.filter(c => c.semester === semesterTab)
 
   return (
-    <main className='main cd-form'>
-      <ChooseSemester semesterNo={semesterTab} setSemesterTab={setSemesterTab} />
-      <CoursesList courses={filteredCourses} />
+    <main className='main cd-page'>
+      <h1 className='title'>Courses Declaration Form</h1>
+      <div className='cd-form'>
+        <ChooseSemester semesterNo={semesterTab} setSemesterTab={setSemesterTab} />
+        <CoursesList courses={filteredCourses} />
+      </div>
     </main>
   )
 }

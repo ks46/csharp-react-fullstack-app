@@ -3,10 +3,11 @@ function SemesterItem({ semesterNo, isActive, setSemesterTab }) {
 
   return (
     <li
-      className={`semester-item ${activeClass}`}
+      className={`semester-item ${activeClass}-bg`}
       onClick={() => setSemesterTab(semesterNo)}
     >
-      Semester {semesterNo}
+      <p className={activeClass}>
+        {`Semester ${semesterNo}`}</p>
     </li>
   )
 }
@@ -15,7 +16,7 @@ export default function ChooseSemester({ semesterNo, setSemesterTab }) {
   
   return (
     <nav className='choose-semester'>
-      <ul>
+      <ul className='semester-list'>
         <SemesterItem semesterNo={1} isActive={semesterNo === 1} setSemesterTab={setSemesterTab} />
         <SemesterItem semesterNo={2} isActive={semesterNo === 2} setSemesterTab={setSemesterTab} />
         <SemesterItem semesterNo={3} isActive={semesterNo === 3} setSemesterTab={setSemesterTab} />
