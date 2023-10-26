@@ -2,6 +2,9 @@ function Course({ course }) {
   // TODO: display specializations for each course
   return (
     <tr>
+      <td className='checkbox-table-col'>
+        <input type='checkbox'/>
+      </td>
       <td className='course-table-col'>{course.name}</td>
       <td className='ects-table-col'>{course.ects}</td>
       <td className='type-table-col'>{course.description}</td>
@@ -15,15 +18,13 @@ function Course({ course }) {
   );
 }
 
-
 export default function CoursesList({ courses }) {
-  console.log(courses)
-
   return (
     <div className='courses-list'>
       <table>
         <thead>
           <tr>
+            <th className='checkbox-table-col'></th>
             <th className='course-table-col'>Course</th>
             <th className='ects-table-col'>ECTS</th>
             <th className='type-table-col'>Category</th>
