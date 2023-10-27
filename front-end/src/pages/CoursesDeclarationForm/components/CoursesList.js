@@ -1,5 +1,9 @@
 function Course({ course, isChecked, updateSelectedCourses }) {
-  // TODO: display specializations for each course
+  const categories = ['', '', '', '', '', '']
+  course.specializations.forEach(s => {
+    categories[s.specializationId - 1] = s.category
+  });
+
   return (
     <tr className={isChecked ? 'checked' : ''}>
       <td className='table-col checkbox-table-col'>
@@ -12,12 +16,11 @@ function Course({ course, isChecked, updateSelectedCourses }) {
       <td className='table-col course-table-col'>{course.name}</td>
       <td className='table-col ects-table-col'>{course.ects}</td>
       <td className='table-col type-table-col'>{course.description}</td>
-      <td className='table-col s-table-col'>B</td>
-      <td className='table-col s-table-col'></td>
-      <td className='table-col s-table-col'>B</td>
-      <td className='table-col s-table-col'>Y</td>
-      <td className='table-col s-table-col'></td>
-      <td className='table-col s-table-col'></td>
+      {
+        categories.map((c, index) => {
+          return <td className='table-col s-table-col' key={`${course.id}-${index}`}>{c}</td>
+        })
+      }
     </tr>
   );
 }
