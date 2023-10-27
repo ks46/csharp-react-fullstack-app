@@ -19,6 +19,7 @@ namespace courses.wwwapi.Repository
         {
             using (var db = new DataContext())
             {
+                // TODO: mark as non-available to be declared all courses that this student has successfully passed
                 // return all courses, with their specializations info
                 return db.Courses.Include(c => c.specializations).ToList();
             }
@@ -29,7 +30,7 @@ namespace courses.wwwapi.Repository
         {
             using (var db = new DataContext())
             {
-                // ensure that such studentId exists
+                // ensure that student with such studentId exists
                 if (db.Students.SingleOrDefault(s => s.id == studentId) == null)
                     return null;
 
@@ -59,6 +60,21 @@ namespace courses.wwwapi.Repository
                 });
                 db.SaveChanges();
 
+                return d;
+            }
+            return null;
+        }
+
+        public Declaration? GetDeclaration(int studentId, int declarationId)
+        {
+            using (var db = new DataContext())
+            {
+                // ensure that student with such studentId exists
+                if (db.Students.SingleOrDefault(s => s.id == studentId) == null)
+                    return null;
+
+                // find declaration with such declarationId
+                Declaration? d = db.Declarations.Include(d => d.courses).ThenInclude(cd => cd.course).SingleOrDefault(d => d.id == declarationId);
                 return d;
             }
             return null;

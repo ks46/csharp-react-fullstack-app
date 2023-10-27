@@ -91,10 +91,10 @@ namespace courses.wwwapi.EndPoints
                     if (courseIds == null || courseIds.Count == 0)
                         return Results.BadRequest();    // TODO: return appropriate error message
 
-                    Declaration? d = service.CreateDeclaration(studentId, courseIds);
-                    if (d == null)
+                    Declaration? declaration = service.CreateDeclaration(studentId, courseIds);
+                    if (declaration == null)
                         return Results.NotFound();
-                    return Results.Created($"https://localhost:7201/students/{studentId}/declarations/{d.id}", d);
+                    return Results.Created($"https://localhost:7201/students/{studentId}/declarations/{declaration.id}", declaration);
                 });
             }
             catch (Exception ex)
@@ -109,11 +109,26 @@ namespace courses.wwwapi.EndPoints
         /// </summary>
         /// <returns>
         /// Status 200 - All info for a particular courses declaration
+        /// Status 404 studentId or declarationId is not valid
         /// </returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         private static async Task<IResult> GetDeclaration(int studentId, int declarationId, IRepository service)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await Task.Run(() =>
+                {
+                    Declaration? declaration = service.GetDeclaration(studentId, declarationId);
+                    if (declaration == null)
+                        return Results.NotFound();
+                    return Results.Ok(declaration);
+                });
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem(ex.Message);
+            }
         }
     }
 }
