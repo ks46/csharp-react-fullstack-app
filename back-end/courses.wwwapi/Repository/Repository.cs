@@ -43,8 +43,8 @@ namespace courses.wwwapi.Repository
                     updatedAt = dt
                 };
                 db.Declarations.Add(d);
+                db.SaveChanges();
 
-                /*
                 // for each courseId, create a new CoursesDeclarations object
                 courseIds.ForEach(courseId =>
                 {
@@ -57,9 +57,8 @@ namespace courses.wwwapi.Repository
                         updatedAt = dt
                     });
                 });
-                */
-
                 db.SaveChanges();
+
                 return d;
             }
             return null;
