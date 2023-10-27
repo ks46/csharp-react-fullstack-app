@@ -1,5 +1,6 @@
 ﻿using courses.wwwapi.Data;
 using courses.wwwapi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace courses.wwwapi.Repository
 {
@@ -19,7 +20,7 @@ namespace courses.wwwapi.Repository
             using (var db = new DataContext())
             {
                 // TODO: return all courses, with their specialization info, ordered by semester
-                return db.Courses.ToList();
+                return db.Courses.Include(c => c.specializations).ToList();
             }
             return null;
         }
