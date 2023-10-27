@@ -3,21 +3,10 @@ import ChooseSemester from "./components/ChooseSemester";
 import CoursesList from "./components/CoursesList";
 import '../../styles/cd_form.css'
 
-function PreviewButton({ showPreview, setShowPreview, handleSubmit }) {
-
-  return (
-    showPreview ?
-      <button type='submit' onClick={handleSubmit}>Submit Form</button>
-    :
-    <button onClick={() => setShowPreview(true)}>Preview Form</button>
-  );
-}
-
 export default function CoursesDeclarationForm() {
   const [selectedCourses, setSelectedCourses] = useState([])
   const [courses, setCourses] = useState([])
   const [semesterTab, setSemesterTab] = useState(1)
-  const [showPreview, setShowPreview] = useState(false)
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -60,13 +49,16 @@ export default function CoursesDeclarationForm() {
     getCourses()
   }, [])
 
-  let filteredCourses = showPreview ? courses.filter(c => selectedCourses.includes(c.id)) : courses.filter(c => c.semester === semesterTab)
+  let filteredCourses = (semesterTab === 0) ? courses.filter(c => selectedCourses.includes(c.id)) : courses.filter(c => c.semester === semesterTab)
 
   return (
     <main className='main cd-page'>
       <h1 className='title'>Courses Declaration Form</h1>
       <div className='cd-form'>
-        <ChooseSemester semesterNo={semesterTab} setSemesterTab={setSemesterTab} />
+        <ChooseSemester
+          semesterNo={semesterTab}
+          setSemesterTab={setSemesterTab}
+        />
         {
           filteredCourses &&
             <CoursesList
@@ -75,8 +67,6 @@ export default function CoursesDeclarationForm() {
               updateSelectedCourses={updateSelectedCourses}
             />
         }
-
-        <PreviewButton showPreview={showPreview} setShowPreview={setShowPreview} handleSubmit={handleSubmit} />
       </div>
     </main>
   )
