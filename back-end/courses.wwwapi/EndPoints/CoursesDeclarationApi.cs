@@ -75,12 +75,33 @@ namespace courses.wwwapi.EndPoints
         /// Create a new declaration for a particular student
         /// </summary>
         /// <returns>
-        /// Status 201 - Ticket object created
+        /// Status 201 - CoursesDeclaration object created
         /// </returns>
         [ProducesResponseType(StatusCodes.Status201Created)]
-        private static async Task<IResult> PostDeclaration(int studentId, IRepository service)
+        private static async Task<IResult> PostDeclaration(int studentId, IEnumerable<int> courseIds, IRepository service)
         {
             throw new NotImplementedException();
+            try
+            {
+                return await Task.Run(() =>
+                {
+                    DateTime dt = DateTime.UtcNow;
+                    Declaration decl = new Declaration()
+                    {
+                        studentId = studentId,
+                        period = "Winter 2023",
+                        createdAt = dt,
+                        updatedAt = dt
+                    };
+
+
+                    return Results.Ok();
+                });
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem(ex.Message);
+            }
         }
 
 
