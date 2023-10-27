@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function OptionItem({ text, isActive, handleClick}) {
   const activeClass = isActive ? 'active' : 'inactive'
 
@@ -23,6 +25,17 @@ function PreviewButton({isActive, setSemesterTab }) {
   );
 }
 
+function SubmitButton({ handleSubmit }) {
+  return (
+    <Link to={'/coursedeclarationform/success'} className='semester-item'>
+      <OptionItem
+        text='Submit'
+        handleClick={handleSubmit}
+        />
+    </Link>
+  );
+}
+
 function SemesterItem({ semesterNo, isActive, setSemesterTab }) {
   return (
     <OptionItem
@@ -33,13 +46,11 @@ function SemesterItem({ semesterNo, isActive, setSemesterTab }) {
   )
 }
 
-export default function ChooseSemester({ semesterNo, setSemesterTab }) {
+export default function ChooseSemester({ semesterNo, setSemesterTab, handleSubmit }) {
   
   return (
     <nav className='choose-semester'>
       <ul className='semester-list'>
-      <PreviewButton isActive={semesterNo === 0} setSemesterTab={setSemesterTab} />
-
         <SemesterItem semesterNo={1} isActive={semesterNo === 1} setSemesterTab={setSemesterTab} />
         <SemesterItem semesterNo={2} isActive={semesterNo === 2} setSemesterTab={setSemesterTab} />
         <SemesterItem semesterNo={3} isActive={semesterNo === 3} setSemesterTab={setSemesterTab} />
@@ -49,7 +60,9 @@ export default function ChooseSemester({ semesterNo, setSemesterTab }) {
         <SemesterItem semesterNo={7} isActive={semesterNo === 7} setSemesterTab={setSemesterTab} />
         <SemesterItem semesterNo={8} isActive={semesterNo === 8} setSemesterTab={setSemesterTab} />
 
-        {/* <PreviewButton isActive={semesterNo === 0} setSemesterTab={setSemesterTab} /> */}
+        <PreviewButton isActive={semesterNo === 0} setSemesterTab={setSemesterTab} />
+
+        <SubmitButton handleSubmit={handleSubmit} />
       </ul>
     </nav>
   )

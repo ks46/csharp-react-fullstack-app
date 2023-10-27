@@ -6,8 +6,8 @@ import Header from './components/Header.js';
 import LeftMenu from './components/LeftMenu';
 import Profile from './pages/Profile';
 import DataContext from './DataContext';
-import ViewPostPage from './pages/ViewPostPage';
 import CoursesDeclarationForm from './pages/CoursesDeclarationForm';
+import ViewCoursesDeclaration from './pages/ViewCoursesDeclaration';
 
 function App() {
   const [user, setUser] = useState(null)
@@ -43,10 +43,12 @@ function App() {
         <LeftMenu />
 
         <Routes>
+          {/* TODO: create home page element */}
           <Route path='/' element={<CoursesDeclarationForm />} />
-          <Route path='/profile/' element={<Profile />} />
+          <Route path='/coursedeclarationform' element={<CoursesDeclarationForm />} />
+          <Route path='/coursedeclarationform/success' element={<ViewCoursesDeclaration />} />
+          <Route path='/profile' element={<Profile />} />
           <Route path='/profile/:id' element={<Profile />} />
-          <Route path='/posts/:id' element={<ViewPostPage />} />
         </Routes>
         
       </DataContext.Provider>

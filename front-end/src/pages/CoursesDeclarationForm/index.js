@@ -9,7 +9,7 @@ export default function CoursesDeclarationForm() {
   const [semesterTab, setSemesterTab] = useState(1)
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    console.log('Submitting data:\n', selectedCourses)
     // TODO: insert studentId parameter into the url to fetch data
     /*
     fetch(`https://localhost:7201/students/1/declarations`, {
@@ -30,7 +30,7 @@ export default function CoursesDeclarationForm() {
     const index = selectedCourses.indexOf(courseId)
     if (index === -1) {
       // insert this courseId to selectedCourses
-      setSelectedCourses([courseId, ...selectedCourses])
+      setSelectedCourses([...selectedCourses, courseId])
     } else {
       const newSelectedCourses = [...selectedCourses]
       newSelectedCourses.splice(index, 1)
@@ -58,6 +58,7 @@ export default function CoursesDeclarationForm() {
         <ChooseSemester
           semesterNo={semesterTab}
           setSemesterTab={setSemesterTab}
+          handleSubmit={handleSubmit}
         />
         {
           filteredCourses &&
