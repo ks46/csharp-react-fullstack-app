@@ -3,10 +3,39 @@ import ChooseSemester from "./components/ChooseSemester";
 import CoursesList from "./components/CoursesList";
 import '../../styles/cd_form.css'
 
+function PreviewButton({ showPreview, setShowPreview, handleSubmit }) {
+
+  return (
+    showPreview ?
+      <button type='submit' onClick={handleSubmit}>Submit Form</button>
+    :
+    <button onClick={() => setShowPreview(true)}>Preview Form</button>
+  );
+}
+
 export default function CoursesDeclarationForm() {
-  const [selectedCourses, setSelectedCourses] = useState([1,46])
+  const [selectedCourses, setSelectedCourses] = useState([])
   const [courses, setCourses] = useState([])
   const [semesterTab, setSemesterTab] = useState(1)
+  const [showPreview, setShowPreview] = useState(false)
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    // TODO: insert studentId parameter into the url to fetch data
+    /*
+    fetch(`https://localhost:7201/students/1/declarations`, {
+      method: 'POST',
+      body: JSON.stringify({
+        courseIds: selectedCourses
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json))
+    */
+  }
 
   const updateSelectedCourses = (courseId) => {
     const index = selectedCourses.indexOf(courseId)
@@ -31,7 +60,7 @@ export default function CoursesDeclarationForm() {
     getCourses()
   }, [])
 
-  let filteredCourses = courses.filter(c => c.semester === semesterTab)
+  let filteredCourses = showPreview ? courses.filter(c => selectedCourses.includes(c.id)) : courses.filter(c => c.semester === semesterTab)
 
   return (
     <main className='main cd-page'>
@@ -40,12 +69,14 @@ export default function CoursesDeclarationForm() {
         <ChooseSemester semesterNo={semesterTab} setSemesterTab={setSemesterTab} />
         {
           filteredCourses &&
-          <CoursesList
-            courses={filteredCourses}
-            selectedCourses={selectedCourses}
-            updateSelectedCourses={updateSelectedCourses}
-          />
+            <CoursesList
+              courses={filteredCourses}
+              selectedCourses={selectedCourses}
+              updateSelectedCourses={updateSelectedCourses}
+            />
         }
+
+        <PreviewButton showPreview={showPreview} setShowPreview={setShowPreview} handleSubmit={handleSubmit} />
       </div>
     </main>
   )

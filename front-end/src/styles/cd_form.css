@@ -8,12 +8,12 @@
   grid-template:
     'choose-semester courses-list' 1fr /
     130px 1fr;
+  grid-gap: 15px;
 }
 
 .app > .cd-page > .cd-form > .choose-semester {
   grid-area: choose-semester;
   padding: 10px;
-  /* background-color: blueviolet; */
 }
 
 .app > .cd-page > .cd-form > .choose-semester > .semester-list {
@@ -46,5 +46,39 @@
 
 .app > .cd-page > .cd-form > .courses-list {
   grid-area: courses-list;
-  background-color: cadetblue;
+  /* background-color: lightgoldenrodyellow; */
+}
+
+/* NOTE: styles for courses table */
+.app > .cd-page > .cd-form > .courses-list .checkbox-table-col {
+  /* background-color: purple; */
+  width: 15px;
+  padding: 0 2px;
+}
+
+.app > .cd-page > .cd-form > .courses-list .course-table-col {
+  /* background-color: lavenderblush; */
+  width: 300px;
+  padding: 0 2px;
+  text-align: left;
+}
+
+.app > .cd-page > .cd-form > .courses-list .ects-table-col {
+  /* background-color: lightcoral; */
+  width: 45px;
+  text-align: center;
+}
+
+.app > .cd-page > .cd-form > .courses-list .type-table-col {
+  /* background-color: lightblue; */
+  width: 230px;
+  padding: 0 2px;
+  text-align: left;
+}
+
+.app > .cd-page > .cd-form > .courses-list .s-table-col {
+  /* background-color: lightgreen; */
+  width: 30px;
+  padding: 0 2px;
+  text-align: center;
 }
