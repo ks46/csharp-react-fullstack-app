@@ -80,6 +80,7 @@ namespace courses.wwwapi.EndPoints
         /// Status 404 - Student with such studentId does not exist
         /// </returns>
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         private static async Task<IResult> PostDeclaration(int studentId, List<int> courseIds, IRepository service)
         {
@@ -89,9 +90,11 @@ namespace courses.wwwapi.EndPoints
                 {
                     if (courseIds == null || courseIds.Count == 0)
                         return Results.BadRequest();    // TODO: return appropriate error message
+
                     Declaration? d = service.CreateDeclaration(studentId, courseIds);
-                    if (d == null) return Results.NotFound();
-                    return Results.Created($"/students/{studentId}/declarations/{d.id}", d);    // TODO: return appropriate Results.Created()
+                    if (d == null)
+                        return Results.NotFound();
+                    return Results.Created($"https://localhost:7201/students/{studentId}/declarations/{d.id}", d);
                 });
             }
             catch (Exception ex)
