@@ -76,26 +76,22 @@ namespace courses.wwwapi.EndPoints
         /// </summary>
         /// <returns>
         /// Status 201 - CoursesDeclaration object created
+        /// Status 400 - Provided list of courseIds is empty
+        /// Status 404 - Student with such studentId does not exist
         /// </returns>
         [ProducesResponseType(StatusCodes.Status201Created)]
-        private static async Task<IResult> PostDeclaration(int studentId, IEnumerable<int> courseIds, IRepository service)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        private static async Task<IResult> PostDeclaration(int studentId, List<int> courseIds, IRepository service)
         {
-            throw new NotImplementedException();
             try
             {
                 return await Task.Run(() =>
                 {
-                    DateTime dt = DateTime.UtcNow;
-                    Declaration decl = new Declaration()
-                    {
-                        studentId = studentId,
-                        period = "Winter 2023",
-                        createdAt = dt,
-                        updatedAt = dt
-                    };
-
-
-                    return Results.Ok();
+                    if (courseIds == null || courseIds.Count == 0)
+                        return Results.BadRequest();    // TODO: return appropriate error message
+                    Declaration? d = service.CreateDeclaration(studentId, courseIds);
+                    if (d == null) return Results.NotFound();
+                    return Results.Created($"/students/{studentId}/declarations/{d.id}", d);    // TODO: return appropriate Results.Created()
                 });
             }
             catch (Exception ex)

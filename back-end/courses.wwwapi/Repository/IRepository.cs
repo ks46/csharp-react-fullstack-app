@@ -7,5 +7,6 @@ namespace courses.wwwapi.Repository
     {
         Student? GetStudent(int studentId);
         IEnumerable<Course> GetCourses(int studentId);
+        Declaration? CreateDeclaration(int studentId, List<int> courseIds);
     }
 }
