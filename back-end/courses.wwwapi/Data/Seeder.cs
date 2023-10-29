@@ -98,7 +98,11 @@ namespace courses.wwwapi.Data
             new Course() { id = 91, name = "Special Topics on Computing Systems and Computer Science Applications", ects = 4, description = "Elective Specialization courses", semester = 8, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
             new Course() { id = 92, name = "Speech and Natural Language Processing", ects = 6, description = "Elective Specialization courses", semester = 8, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
             new Course() { id = 93, name = "Stochastic Signals", ects = 6, description = "Elective Specialization courses", semester = 8, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
-            new Course() { id = 94, name = "Wireless Links", ects = 6, description = "Elective Specialization courses", semester = 8, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow }
+            new Course() { id = 94, name = "Wireless Links", ects = 6, description = "Elective Specialization courses", semester = 8, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new Course() { id = 95, name = "Thesis I", ects = 8, description = "Thesis/Internship", semester = 7, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new Course() { id = 96, name = "Thesis II", ects = 8, description = "Thesis/Internship", semester = 8, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new Course() { id = 97, name = "Internship I", ects = 8, description = "Thesis/Internship", semester = 7, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new Course() { id = 98, name = "Internship II", ects = 8, description = "Thesis/Internship", semester = 8, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow }
         };
 
         private static List<CoursesSpecializations> _specializations = new List<CoursesSpecializations>()
@@ -187,8 +191,8 @@ namespace courses.wwwapi.Data
                         email = "sdi1700000@di.uoa.gr",
                         phone = "6900000000",
                         department = "Informatics and Telecommunications",
-                        faculty = "",
-                        semester = 7,
+                        faculty = "School of Sciences",
+                        semester = 5,
                         createdAt = dt,
                         updatedAt = dt
                     });
