@@ -8,8 +8,6 @@ export default function ProfileInfo({ user }) {
       <div className='row'>
         <AccountInfo data={user} />
         <StudiesInfo data={user} />
-
-        {/* TODO: add info about courses declarations */}
       </div>
     </form>
   )

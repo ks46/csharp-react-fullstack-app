@@ -10,20 +10,19 @@ export default function CoursesDeclarationForm() {
 
   const handleSubmit = (event) => {
     console.log('Submitting data:\n', selectedCourses)
+    console.log(JSON.stringify(selectedCourses))
     // TODO: insert studentId parameter into the url to fetch data
-    /*
     fetch(`https://localhost:7201/students/1/declarations`, {
       method: 'POST',
-      body: JSON.stringify({
-        courseIds: selectedCourses
-      }),
+      body: JSON.stringify(
+        selectedCourses
+      ),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
     })
       .then((response) => response.json())
       .then((json) => console.log(json))
-    */
   }
 
   const updateSelectedCourses = (courseId) => {

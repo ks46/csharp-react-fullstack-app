@@ -3,7 +3,7 @@ import greenTick from '../../../assets/green-tick-icon.svg'
 function Requirement({ data }) {
   return (
     <div className='row'>
-      {! data.done ?
+      { data.done ?
         <img src={greenTick} alt='green tick icon'/>
         : <div></div>
       }
