@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import UserBanner from "../../../components/UserBanner";
 import { useEffect, useState } from "react";
 import ProfileInfo from "./ProfileInfo";
+import Delimeter from "../../../components/Delimeter";
+import Requirements from "./Requirements";
 
 function ProfileHeader({ user }) {
   return (
@@ -32,6 +34,10 @@ export default function ProfileContent() {
       <div className='profile-content box-container box-container-white'>
         <ProfileHeader user={user} />
         <ProfileInfo user={user} />
+
+        <Delimeter />
+
+        <Requirements data={user.requirements} />
       </div>
   )
 }
