@@ -174,6 +174,33 @@ namespace courses.wwwapi.Data
             new CoursesSpecializations() { courseId = 93, specializationId = 6, category = "B" }
         };
 
+        private static List<Declaration> _declarations = new List<Declaration>()
+        {
+            new Declaration() { id = 1, studentId = 1, period = "Winter 2017-2018", createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new Declaration() { id = 2, studentId = 1, period = "Spring 2017-2018", createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new Declaration() { id = 3, studentId = 1, period = "September 2017-2018", createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new Declaration() { id = 4, studentId = 1, period = "Winter 2018-2019", createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new Declaration() { id = 5, studentId = 1, period = "Spring 2018-2019", createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new Declaration() { id = 6, studentId = 1, period = "September 2018-2019", createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow }
+        };
+
+        private static List<CoursesDeclarations> _coursesDeclarations = new List<CoursesDeclarations>()
+        {
+            new CoursesDeclarations() { courseId = 1, declarationId = 1, grade = 8.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new CoursesDeclarations() { courseId = 2, declarationId = 1, grade = 8.5M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new CoursesDeclarations() { courseId = 3, declarationId = 1, grade = 9.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new CoursesDeclarations() { courseId = 4, declarationId = 1, grade = 3.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new CoursesDeclarations() { courseId = 5, declarationId = 1, grade = 9.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new CoursesDeclarations() { courseId = 7, declarationId = 2, grade = 8.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new CoursesDeclarations() { courseId = 9, declarationId = 2, grade = 0.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new CoursesDeclarations() { courseId = 10, declarationId = 2, grade = 0.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new CoursesDeclarations() { courseId = 11, declarationId = 2, grade = 5.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new CoursesDeclarations() { courseId = 4, declarationId = 3, grade = 9.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new CoursesDeclarations() { courseId = 9, declarationId = 3, grade = 7.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new CoursesDeclarations() { courseId = 10, declarationId = 3, grade = 7.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+
+        };
+
         public static void SeedCoursesDeclarationApi(this WebApplication app)
         {
             using (var db = new DataContext())
@@ -210,6 +237,20 @@ namespace courses.wwwapi.Data
                 if (!db.CoursesSpecializations.Any())
                 {
                     db.CoursesSpecializations.AddRange(_specializations);
+                    db.SaveChanges();
+                }
+
+                // initialise Declarations table
+                if (!db.Declarations.Any())
+                {
+                    db.Declarations.AddRange(_declarations);
+                    db.SaveChanges();
+                }
+
+                // initialise CoursesDeclarations table
+                if (!db.CoursesDeclarations.Any())
+                {
+                    db.CoursesDeclarations.AddRange(_coursesDeclarations);
                     db.SaveChanges();
                 }
             }
