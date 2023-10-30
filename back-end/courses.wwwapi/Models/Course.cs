@@ -20,7 +20,7 @@ namespace courses.wwwapi.Models
 
     public class CourseDTO
     {
-        public string id { get; set; }
+        public string description { get; set; }
         public int sum { get; set; }
         public int count { get; set; }
     }

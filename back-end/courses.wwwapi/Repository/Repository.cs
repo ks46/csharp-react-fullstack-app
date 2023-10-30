@@ -19,12 +19,10 @@ namespace courses.wwwapi.Repository
                 // retrieve all information about courses successfully passed by this student
                 if (db.Declarations == null)
                     return student;
+                /** TODO: use Entity Framework version 8 in order to be able to use a single query
+                 * that returns all results as needed, as explained here:
+                 * https://timdeschryver.dev/blog/you-can-now-return-unmapped-types-from-raw-sql-select-statements-with-entity-framework-8
 
-                // List<Declaration> results = db.Declarations.Include(d => d.courses).ToList().FindAll(d => d.studentId == studentId);
-
-                // var results = db.Courses.FromSql($"SELECT c.description as id, SUM(c.ects) as ects, COUNT(c.id) as ,  FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = 1 AND cd.grade >= 5.0) GROUP BY c.description;").ToList();
-
-                /** TODO: get results of this query
                     SELECT c.description, SUM(c.ects), COUNT(*) FROM "Courses" c
                     WHERE c.id IN (
                         SELECT cd."courseId"
@@ -36,21 +34,28 @@ namespace courses.wwwapi.Repository
                     GROUP BY c.description
                     ;
                  */
+                int ects = db.Database.SqlQuery<int>($"SELECT SUM(c.ects) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = 1 )").ToList()[0];
+                student.requirements.Add(new Requirement() { text = $"{ects} / 240 ECTS", done = ects >= 240 });
 
-                int ects = 0;
-                /**
-                 * for each result of SQL query above,
-                 * create the requirement element
-                */
+                int result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND c.description = 'Compulsory courses')").ToList()[0];
+                student.requirements.Add(new Requirement() { text = $"{result} / 18 compulsory courses", done = result == 18 });
 
-                student.requirements.Add(new Requirement() { text = "?? / 240 ECTS", done = false });
-                student.requirements.Add(new Requirement() { text = "?? / 18 compulsory courses", done = false });
-                student.requirements.Add(new Requirement() { text = "?? / 4 track compulsory courses", done = false });
-                student.requirements.Add(new Requirement() { text = "?? / 1 track project", done = false });
-                student.requirements.Add(new Requirement() { text = "?? / 4 core specialization courses", done = false });
-                student.requirements.Add(new Requirement() { text = "?? / 3 general education", done = false });
-                student.requirements.Add(new Requirement() { text = "?? / thesis and/or internship", done = false });
+                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND c.description = 'Track Compulsory courses')").ToList()[0];
+                student.requirements.Add(new Requirement() { text = $"{result} / 4 track compulsory courses", done = result >= 4 });
 
+                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND c.description = 'Project')").ToList()[0];
+                student.requirements.Add(new Requirement() { text = $"{result} / 1 track project", done = result >= 1 });
+
+                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND c.description = 'Elective Specialization courses')").ToList()[0];
+                student.requirements.Add(new Requirement() { text = $"{result} / 4 core specialization courses", done = result >= 4 });
+
+                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND c.description = 'General Education')").ToList()[0];
+                student.requirements.Add(new Requirement() { text = $"{result} / 3 general education", done = result == 3 });
+
+                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND c.description = 'Thesis/Internship')").ToList()[0];
+                student.requirements.Add(new Requirement() { text = $"{result} / 2 thesis and/or internship", done = result >= 2 });
+
+                /* TODO: add AND cd.grade >= 5.0 to sql query above */
                 return student;
             }
             return null;
