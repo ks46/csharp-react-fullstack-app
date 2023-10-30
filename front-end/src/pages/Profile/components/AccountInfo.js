@@ -5,7 +5,7 @@ export default function AccountInfo({ data }) {
   return (
     <div className='account-info'>
       <Delimeter />
-      <h2>Account info</h2>
+      <h2 className='section-title'>Account info</h2>
       
       <InputField
         label='First Name'

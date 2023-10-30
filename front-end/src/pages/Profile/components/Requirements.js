@@ -16,7 +16,7 @@ export default function Requirements({ data }) {
 
   return (
     <div className='requirements-list'>
-      <h2>Undergraduate Study Program Requirements</h2>
+      <h2 className='section-title'>Undergraduate Study Program Requirements</h2>
       {
         data.map(r => <Requirement data={r} />)
       }

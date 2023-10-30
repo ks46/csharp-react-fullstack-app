@@ -5,7 +5,7 @@ export default function StudiesInfo({data}) {
   return (
     <div className='studies-info'>
       <Delimeter />
-      <h2>Studies Info</h2>
+      <h2 className='section-title'>Studies Info</h2>
 
       <InputField
         label='Identification Number'

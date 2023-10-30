@@ -49,3 +49,7 @@
   display: grid;
   grid-template-columns: 30px auto;
 }
+
+.app > .profile > .profile-content .section-title {
+  margin: 20px 5px;
+}
