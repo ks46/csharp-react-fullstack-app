@@ -1,4 +1,6 @@
-﻿namespace courses.wwwapi.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace courses.wwwapi.Models
 {
     public class Course
     {
@@ -11,5 +13,8 @@
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
         public List<CoursesSpecializations> specializations { get; set; } = new List<CoursesSpecializations>();
+
+        [NotMapped]
+        public bool isAvailable { get; set; } = true;
     }
 }

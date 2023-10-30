@@ -10,7 +10,45 @@ namespace courses.wwwapi.Repository
         {
             using (var db = new DataContext())
             {
-                return db.Students.SingleOrDefault(s => s.id == studentId);
+                // TODO: display results about USP requirements
+                Student? student = db.Students.SingleOrDefault(s => s.id == studentId);
+                if (student == null)
+                    return null;
+
+                // retrieve all information about courses successfully passed by this student
+                if (db.Declarations == null)
+                    return student;
+
+                // List<Declaration> results = db.Declarations.Include(d => d.courses).ToList().FindAll(d => d.studentId == studentId);
+
+                /** TODO: get results of this query
+                    SELECT c.description, SUM(c.ects), COUNT(*) FROM "Courses" c
+                    WHERE c.id IN (
+                        SELECT cd."courseId"
+                        FROM "Declarations" d
+                        INNER JOIN "CoursesDeclarations" cd ON cd."declarationId" = d.id
+                        WHERE d."studentId" = 1
+                        AND cd.grade >= 5.0
+                    )
+                    GROUP BY c.description
+                    ;
+                 */
+
+                int ects = 0;
+                /**
+                 * for each result of SQL query above,
+                 * create the requirement element
+                */
+
+                student.requirements.Add(new Requirement() { text = "?? / 240 ECTS", done = false });
+                student.requirements.Add(new Requirement() { text = "?? / 18 compulsory courses", done = false });
+                student.requirements.Add(new Requirement() { text = "?? / 4 track compulsory courses", done = false });
+                student.requirements.Add(new Requirement() { text = "?? / 1 track project", done = false });
+                student.requirements.Add(new Requirement() { text = "?? / 4 core specialization courses", done = false });
+                student.requirements.Add(new Requirement() { text = "?? / 3 general education", done = false });
+                student.requirements.Add(new Requirement() { text = "?? / thesis and/or internship", done = false });
+
+                return student;
             }
             return null;
         }
