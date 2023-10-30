@@ -55,7 +55,8 @@ export default function CoursesDeclarationForm() {
   let filteredCourses = (semesterTab === 0) ? courses.filter(c => selectedCourses.includes(c.id)) : courses.filter(c => c.semester === semesterTab)
 
   return (
-    <main className='main cd-page'>
+    // className='profile-content box-container box-container-white'
+    <main className='main cd-page box-container box-container-white'>
       <h1 className='title'>Courses Declaration Form</h1>
       <div className='cd-form'>
         <ChooseSemester
