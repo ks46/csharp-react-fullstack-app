@@ -1,12 +1,24 @@
 import greenTick from '../../../assets/green-tick-icon.svg'
+
+function Requirement({ data }) {
+  return (
+    <div className='row'>
+      { data.done ?
+        <img src={greenTick} alt='green tick icon'/>
+        : <div> </div>
+      }
+      <p>{data.text}</p>
+    </div>
+  );
+}
+
 export default function Requirements({ data }) {
 
   return (
-    <div>
+    <div className='requirements-list'>
       <h2>Undergraduate Study Program Requirements</h2>
-      <img src={greenTick} alt='green tick icon'/>
       {
-        data.map(r => <p>{r.text}</p>)
+        data.map(r => <Requirement data={r} />)
       }
     </div>
   );
