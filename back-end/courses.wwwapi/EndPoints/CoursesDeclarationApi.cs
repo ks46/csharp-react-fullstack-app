@@ -109,7 +109,7 @@ namespace courses.wwwapi.EndPoints
         /// </summary>
         /// <returns>
         /// Status 200 - All info for a particular courses declaration
-        /// Status 404 studentId or declarationId is not valid
+        /// Status 404 - studentId or declarationId is not valid
         /// </returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

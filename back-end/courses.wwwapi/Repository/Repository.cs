@@ -11,7 +11,7 @@ namespace courses.wwwapi.Repository
         {
             using (var db = new DataContext())
             {
-                // TODO: display results about USP requirements
+                // display results about USP requirements
                 Student? student = db.Students.SingleOrDefault(s => s.id == studentId);
                 if (student == null)
                     return null;
@@ -37,22 +37,22 @@ namespace courses.wwwapi.Repository
                 int ects = db.Database.SqlQuery<int>($"SELECT SUM(c.ects) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = 1 )").ToList()[0];
                 student.requirements.Add(new Requirement() { text = $"{ects} / 240 ECTS", done = ects >= 240 });
 
-                int result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND c.description = 'Compulsory courses')").ToList()[0];
+                int result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND cd.grade >= 5.0 AND c.description = 'Compulsory courses')").ToList()[0];
                 student.requirements.Add(new Requirement() { text = $"{result} / 18 compulsory courses", done = result == 18 });
 
-                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND c.description = 'Track Compulsory courses')").ToList()[0];
+                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND cd.grade >= 5.0 AND c.description = 'Track Compulsory courses')").ToList()[0];
                 student.requirements.Add(new Requirement() { text = $"{result} / 4 track compulsory courses", done = result >= 4 });
 
-                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND c.description = 'Project')").ToList()[0];
+                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND cd.grade >= 5.0 AND c.description = 'Project')").ToList()[0];
                 student.requirements.Add(new Requirement() { text = $"{result} / 1 track project", done = result >= 1 });
 
-                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND c.description = 'Elective Specialization courses')").ToList()[0];
+                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND cd.grade >= 5.0 AND c.description = 'Elective Specialization courses')").ToList()[0];
                 student.requirements.Add(new Requirement() { text = $"{result} / 4 core specialization courses", done = result >= 4 });
 
-                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND c.description = 'General Education')").ToList()[0];
+                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND cd.grade >= 5.0 AND c.description = 'General Education')").ToList()[0];
                 student.requirements.Add(new Requirement() { text = $"{result} / 3 general education", done = result == 3 });
 
-                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND c.description = 'Thesis/Internship')").ToList()[0];
+                result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND cd.grade >= 5.0 AND c.description = 'Thesis/Internship')").ToList()[0];
                 student.requirements.Add(new Requirement() { text = $"{result} / 2 thesis and/or internship", done = result >= 2 });
 
                 /* TODO: add AND cd.grade >= 5.0 to sql query above */
