@@ -1,6 +1,7 @@
 ﻿using courses.wwwapi.Data;
 using courses.wwwapi.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace courses.wwwapi.Repository
 {
@@ -20,6 +21,8 @@ namespace courses.wwwapi.Repository
                     return student;
 
                 // List<Declaration> results = db.Declarations.Include(d => d.courses).ToList().FindAll(d => d.studentId == studentId);
+
+                // var results = db.Courses.FromSql($"SELECT c.description as id, SUM(c.ects) as ects, COUNT(c.id) as ,  FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = 1 AND cd.grade >= 5.0) GROUP BY c.description;").ToList();
 
                 /** TODO: get results of this query
                     SELECT c.description, SUM(c.ects), COUNT(*) FROM "Courses" c

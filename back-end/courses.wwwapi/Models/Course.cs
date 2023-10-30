@@ -17,4 +17,11 @@ namespace courses.wwwapi.Models
         [NotMapped]
         public bool isAvailable { get; set; } = true;
     }
+
+    public class CourseDTO
+    {
+        public string id { get; set; }
+        public int sum { get; set; }
+        public int count { get; set; }
+    }
 }
