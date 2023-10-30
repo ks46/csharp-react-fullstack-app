@@ -48,6 +48,7 @@
 .app > .profile > .profile-content > .requirements-list > .row {
   display: grid;
   grid-template-columns: 30px auto;
+  height: 25px;
 }
 
 .app > .profile > .profile-content .section-title {
