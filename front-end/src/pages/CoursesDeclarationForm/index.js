@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import ChooseSemester from "./components/ChooseSemester";
 import CoursesList from "./components/CoursesList";
 import '../../styles/cd_form.css'
+import { useNavigate } from "react-router-dom";
 
 export default function CoursesDeclarationForm() {
   const [selectedCourses, setSelectedCourses] = useState([])
   const [courses, setCourses] = useState([])
   const [semesterTab, setSemesterTab] = useState(1)
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     console.log('Submitting data:\n', selectedCourses)
-    console.log(JSON.stringify(selectedCourses))
     // TODO: insert studentId parameter into the url to fetch data
     fetch(`https://localhost:7201/students/1/declarations`, {
       method: 'POST',
@@ -22,7 +23,10 @@ export default function CoursesDeclarationForm() {
       },
     })
       .then((response) => response.json())
-      .then((json) => console.log(json))
+      .then((json) => {
+        console.log(json)
+        navigate("/coursedeclarationform/success")
+      })
   }
 
   const updateSelectedCourses = (courseId) => {

@@ -27,12 +27,10 @@ function PreviewButton({isActive, setSemesterTab }) {
 
 function SubmitButton({ handleSubmit }) {
   return (
-    // <Link to={'/coursedeclarationform/success'} className='semester-item'>
-      <OptionItem
-        text='Submit'
-        handleClick={handleSubmit}
-        />
-    // </Link>
+    <OptionItem
+      text='Submit'
+      handleClick={handleSubmit}
+    />
   );
 }
 
