@@ -96,7 +96,7 @@ namespace courses.wwwapi.Repository
                 Declaration d = new Declaration()
                 {
                     studentId = studentId,
-                    period = "Winter 2023",
+                    period = "Winter 2023-2024",
                     createdAt = dt,
                     updatedAt = dt
                 };
