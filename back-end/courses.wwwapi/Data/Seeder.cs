@@ -198,7 +198,8 @@ namespace courses.wwwapi.Data
             new CoursesDeclarations() { courseId = 4, declarationId = 3, grade = 9.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
             new CoursesDeclarations() { courseId = 9, declarationId = 3, grade = 7.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
             new CoursesDeclarations() { courseId = 10, declarationId = 3, grade = 7.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
-
+            new CoursesDeclarations() { courseId = 70, declarationId = 4, grade = 7.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow },
+            new CoursesDeclarations() { courseId = 84, declarationId = 4, grade = 8.0M, createdAt = DateTime.UtcNow, updatedAt = DateTime.UtcNow }
         };
 
         public static void SeedCoursesDeclarationApi(this WebApplication app)
