@@ -55,7 +55,6 @@ namespace courses.wwwapi.Repository
                 result = db.Database.SqlQuery<int>($"SELECT COUNT(*) FROM \"Courses\" c WHERE c.id IN (SELECT cd.\"courseId\" FROM \"Declarations\" d INNER JOIN \"CoursesDeclarations\" cd ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = {studentId} AND cd.grade >= 5.0 AND c.description = 'Thesis/Internship')").ToList()[0];
                 student.requirements.Add(new Requirement() { text = $"{result} / 2 thesis and/or internship", done = result >= 2 });
 
-                /* TODO: add AND cd.grade >= 5.0 to sql query above */
                 return student;
             }
             return null;
@@ -65,9 +64,21 @@ namespace courses.wwwapi.Repository
         {
             using (var db = new DataContext())
             {
-                // TODO: mark as non-available to be declared all courses that this student has successfully passed
                 // return all courses, with their specializations info
-                return db.Courses.Include(c => c.specializations).ToList();
+                List<Course> courses =  db.Courses.Include(c => c.specializations).ToList();
+                if (courses == null)
+                    return null;
+
+                // mark courses that have been successfully passed as not-available to use in current declaration
+                var results = db.Database.SqlQuery<int>($"SELECT cd.\"courseId\" FROM \"CoursesDeclarations\" cd INNER JOIN \"Declarations\" d ON cd.\"declarationId\" = d.id WHERE d.\"studentId\" = 1 AND cd.grade >= 5.0").ToList();
+
+                foreach (Course course in courses)
+                {
+                    if (results.Exists(id => id == course.id))
+                        course.isAvailable = false;
+                }
+
+                return courses;
             }
             return null;
         }
